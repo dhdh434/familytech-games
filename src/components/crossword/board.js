@@ -6,7 +6,9 @@ import { Modal } from "@mui/material";
 import { useUser } from "@/contexts/UserContext";
 import axios from "axios";
 
+
 let START_SQUARES = [];
+
 
 function Board() {
   let BOARD = [];
@@ -693,10 +695,48 @@ function Board() {
     return finished;
   }
 
+let seconds = 0;
+let minutes = 0;
+let hours = 0;
+let timerInterval;
+
+// Function to start the timer
+function startTimer() {
+  timerInterval = setInterval(updateTimer, 1000);
+}
+
+// Function to stop the timer
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+
+// Function to update the timer display
+function updateTimer() {
+  seconds++;
+
+  if (seconds >= 60) {
+    seconds = 0;
+    minutes++;
+    if (minutes >= 60) {
+      minutes = 0;
+      hours++;
+    }
+  }
+
+  const timerDisplay = document.getElementById("timer");
+  timerDisplay.innerText = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+}
+
+// Start the timer when needed
+startTimer();
+
   let clueNumber = -1;
   return !loading ? (
     <>
       <div>
+      <div id="timer" class="timer">
+        00:00:00
+      </div>
         {board.map((rows) => {
           return (
             <div className={styles.div} key={rows.id}>
@@ -750,4 +790,5 @@ function Board() {
     <div>Loading...</div>
   );
 }
+
 export default Board;
