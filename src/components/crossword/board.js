@@ -701,34 +701,36 @@ let hours = 0;
 let timerInterval;
 
 // Function to start the timer
-function startTimer() {
-  timerInterval = setInterval(updateTimer, 1000);
-}
+// function startTimer() {
+//   timerInterval = setInterval(updateTimer, 1000);
+// }
 
-// Function to stop the timer
-function stopTimer() {
-  clearInterval(timerInterval);
-}
+// // Function to stop the timer
+// function stopTimer() {
+//   clearInterval(timerInterval);
+// }
 
-// Function to update the timer display
-function updateTimer() {
-  seconds++;
+// // Function to update the timer display
+// function updateTimer() {
+//   seconds++;
 
-  if (seconds >= 60) {
-    seconds = 0;
-    minutes++;
-    if (minutes >= 60) {
-      minutes = 0;
-      hours++;
-    }
-  }
+//   if (seconds >= 60) {
+//     seconds = 0;
+//     minutes++;
+//     if (minutes >= 60) {
+//       minutes = 0;
+//       hours++;
+//     }
+//   }
 
-  const timerDisplay = document.getElementById("timer");
-  timerDisplay.innerText = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-}
+//   const timerDisplay = document.getElementById("timer");
+//   timerDisplay.innerText = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+// }
 
-// Start the timer when needed
-startTimer();
+// // Start the timer when needed
+// startTimer();
+
+
 
   let clueNumber = -1;
   return !loading ? (
@@ -737,6 +739,9 @@ startTimer();
       <div id="timer" class="timer">
         00:00:00
       </div>
+      
+
+      
         {board.map((rows) => {
           return (
             <div className={styles.div} key={rows.id}>

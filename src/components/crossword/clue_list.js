@@ -55,6 +55,9 @@ function ClueList(props) {
           );
         })}
         <h3>Answers can be seen by right-clicking the clue</h3>
+
+        <p>Need some help finding the answers?
+        Try checking <a href="https://www.familysearch.org/tree/pedigree/portrait/" target="_blank">FamilySearch</a></p>
       </div>
     </>
   );
