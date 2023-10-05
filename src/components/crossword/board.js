@@ -18,6 +18,7 @@ let START_SQUARES = [];
 function Board() {
   // ... Other code ...
   let timerInterval;
+  const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [running, setRunning] = useState(false);
   let BOARD = [];
@@ -37,17 +38,20 @@ function Board() {
     if (!running) {
       setRunning(true);
       timerInterval = setInterval(function () {
-        setSeconds((prevSeconds) => prevSeconds + 1);
+        setSeconds((prevSeconds) => {
+          if (prevSeconds === 59) {
+            // Reset seconds to 0 and increment minutes
+            setMinutes((prevMinutes) => prevMinutes + 1);
+            return 0;
+          } else {
+            // Increment seconds
+            return prevSeconds + 1;
+          }
+        });
       }, 1000);
     }
   }
-
-  function stopTimer() {
-    if (running) {
-      setRunning(false);
-      clearInterval(timerInterval);
-    }
-  }
+  
 
   //Creates an array of all names that could be added to the crossword
   for (const [key, value] of userFSData) {
@@ -722,36 +726,6 @@ function Board() {
   }
 
 
-// Function to start the timer
-// function startTimer() {
-//   timerInterval = setInterval(updateTimer, 1000);
-// }
-
-// // Function to stop the timer
-// function stopTimer() {
-//   clearInterval(timerInterval);
-// }
-
-// // Function to update the timer display
-// function updateTimer() {
-//   seconds++;
-
-//   if (seconds >= 60) {
-//     seconds = 0;
-//     minutes++;
-//     if (minutes >= 60) {
-//       minutes = 0;
-//       hours++;
-//     }
-//   }
-
-//   const timerDisplay = document.getElementById("timer");
-//   timerDisplay.innerText = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-// }
-
-// // Start the timer when needed
-// startTimer();
-
     
         document.addEventListener("DOMContentLoaded", function() {
           
@@ -766,16 +740,16 @@ function Board() {
   return !loading ? (
     <>
       <div>
-      <div>
         <div>
           <h1>Timer:</h1>
-          <p id="timer">{seconds}</p>
-          <button id="startButton" onClick={startTimer}>
-            Start Timer
-          </button>
-        </div>
-      </div>
+          <p id="timer">{`${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`}</p>
 
+            <button id="startButton" onClick={startTimer}>
+              Start Timer
+            </button>
+            <br></br>
+        </div>
+        <br></br>
       
         {board.map((rows) => {
           return (
