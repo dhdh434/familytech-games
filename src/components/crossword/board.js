@@ -7,10 +7,19 @@ import { useUser } from "@/contexts/UserContext";
 import axios from "axios";
 
 
+  // ... Other code ...
+
+
+
 let START_SQUARES = [];
 
 
+
 function Board() {
+  // ... Other code ...
+  let timerInterval;
+  const [seconds, setSeconds] = useState(0);
+  const [running, setRunning] = useState(false);
   let BOARD = [];
   let finished = false;
   let ADDED_WORDS = [];
@@ -22,6 +31,23 @@ function Board() {
   const { userFSData } = useUser();
   let ANCESTORS = [];
   let ascendencyNums = [];
+
+  
+  function startTimer() {
+    if (!running) {
+      setRunning(true);
+      timerInterval = setInterval(function () {
+        setSeconds((prevSeconds) => prevSeconds + 1);
+      }, 1000);
+    }
+  }
+
+  function stopTimer() {
+    if (running) {
+      setRunning(false);
+      clearInterval(timerInterval);
+    }
+  }
 
   //Creates an array of all names that could be added to the crossword
   for (const [key, value] of userFSData) {
@@ -695,10 +721,6 @@ function Board() {
     return finished;
   }
 
-let seconds = 0;
-let minutes = 0;
-let hours = 0;
-let timerInterval;
 
 // Function to start the timer
 // function startTimer() {
@@ -730,16 +752,29 @@ let timerInterval;
 // // Start the timer when needed
 // startTimer();
 
+    
+        document.addEventListener("DOMContentLoaded", function() {
+          
+           
+
+            document.getElementById('startButton').addEventListener('click', startTimer);
+            document.getElementById('stopButton').addEventListener('click', stopTimer);
+        });
 
 
   let clueNumber = -1;
   return !loading ? (
     <>
       <div>
-      <div id="timer" class="timer">
-        00:00:00
+      <div>
+        <div>
+          <h1>Timer:</h1>
+          <p id="timer">{seconds}</p>
+          <button id="startButton" onClick={startTimer}>
+            Start Timer
+          </button>
+        </div>
       </div>
-      
 
       
         {board.map((rows) => {
