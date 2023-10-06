@@ -52,6 +52,7 @@ function Board() {
     }
   }
   
+  
 
   //Creates an array of all names that could be added to the crossword
   for (const [key, value] of userFSData) {
