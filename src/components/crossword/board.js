@@ -52,8 +52,13 @@ function Board() {
     }
   }
   
-  
+  document.addEventListener("keydown", function (event) {
+    if (event.keyCode >= 48 && event.keyCode <= 57) {
+      event.preventDefault();
+    }
+  });
 
+  
   //Creates an array of all names that could be added to the crossword
   for (const [key, value] of userFSData) {
     let currentAncestorName = value.name.compressedName;
