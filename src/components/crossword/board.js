@@ -747,6 +747,10 @@ function Board() {
     <>
       <div>
         <div>
+          <h1 >Halloween Mode! Warning: Very Scary</h1>
+        </div>
+
+        <div>
           <h1>Timer:</h1>
           <p id="timer">{`${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`}</p>
 
