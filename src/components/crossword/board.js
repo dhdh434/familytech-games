@@ -791,7 +791,7 @@ function Board() {
             </div>
           );
         })}
-        {(START_SQUARES = [])}
+        {/* {(START_SQUARES = [])} */}
       </div>
       <ClueList
         verticalClues={vertClues}
