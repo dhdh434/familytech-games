@@ -17,7 +17,7 @@ let START_SQUARES = [];
 
 function Board() {
   // ... Other code ...
-  let timerInterval;
+  const [timerInterval, setTimerInterval] = useState(null);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [running, setRunning] = useState(false);
@@ -37,18 +37,25 @@ function Board() {
   function startTimer() {
     if (!running) {
       setRunning(true);
-      timerInterval = setInterval(function () {
+      const intervalId = setInterval(function () {
         setSeconds((prevSeconds) => {
           if (prevSeconds === 59) {
-            // Reset seconds to 0 and increment minutes
             setMinutes((prevMinutes) => prevMinutes + 1);
             return 0;
           } else {
-            // Increment seconds
             return prevSeconds + 1;
           }
         });
       }, 1000);
+      setTimerInterval(intervalId); // Store the interval ID
+    }
+  }
+  
+
+  function stopTimer() {
+    if (running) {
+      setRunning(false);
+      clearInterval(timerInterval);
     }
   }
   
@@ -757,6 +764,11 @@ function Board() {
             <button id="startButton" onClick={startTimer}>
               Start Timer
             </button>
+
+          <button id="stopButton" onClick={stopTimer} disabled={!running}>
+            Stop Timer
+          </button>
+
             <br></br>
         </div>
         <br></br>
